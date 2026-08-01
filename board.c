@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "types.h"
 
 void initialize_board()
@@ -48,4 +49,11 @@ void initialize_board()
     {39, "Galle Face", PROPERTY}
 
     };
+}
+
+int roll_dice(int seed)
+{
+    srand(seed);
+    int dice_value = rand() % 6 + 1;
+    return dice_value;
 }
