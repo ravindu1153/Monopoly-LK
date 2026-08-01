@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "types.h"
 
 void initialize_board()
@@ -48,4 +49,57 @@ void initialize_board()
     {39, "Galle Face", PROPERTY}
 
     };
+}
+
+
+void initialize_properties()
+{ 
+    const Property_Value property_values[8] = {
+        {BROWN, 750, 500, 2000},
+        {LIGHT_BLUE, 1250, 750, 3000},
+        {PINK, 1750, 1000, 4000},
+        {ORANGE, 2250, 1250, 5000},
+        {RED, 2750, 1500, 6000},
+        {YELLOW, 3250, 2000, 8000},
+        {GREEN, 4000, 2500, 10000},
+        {DARK_BLUE, 5000, 3000, 12000}
+    };
+
+    Property properties[22] = {
+    {1, "Pettah", BROWN, 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {3, "Maradana", BROWN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {6, "Bambalapitiya", LIGHT_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {8, "Wellawatte", LIGHT_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {9, "Mount Lavinia", LIGHT_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {11, "Nugegoda", PINK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {13, "Maharagama", PINK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {14, "Kottawa", PINK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {16, "Negombo", ORANGE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {18, "Katunayake", ORANGE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {19, "Ja-Ela", ORANGE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {21, "Kandy City", RED, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {23, "Peradeniya", RED, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {24, "Katugastota", RED, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {26, "Galle Fort", YELLOW, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {27, "Unawatuna", YELLOW, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {29, "Hikkaduwa", YELLOW, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {31, "Jaffna Town", GREEN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {32, "Nallur", GREEN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {34, "Trincomalee", GREEN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {37, "Nuwara Eliya", DARK_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {39, "Galle Face", DARK_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    };
+
+    for (int i = 0; i < 22; i++) {
+        properties[i].mortgage_value = property_values[properties[i].property_color].mortgage_value;
+        properties[i].house_cost = property_values[properties[i].property_color].house_cost;
+        properties[i].hotel_cost = property_values[properties[i].property_color].hotel_cost;
+    };
+}
+
+int roll_dice(int seed)
+{
+    srand(seed);
+    int dice_value = rand() % 6 + 1;
+    return dice_value;
 }
