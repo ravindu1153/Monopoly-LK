@@ -55,6 +55,7 @@ void initialize_board()
 
 
 void initialize_properties()
+
 { 
     const Property_Value property_values[8] = {
         {BROWN, 750, 500, 2000},
@@ -92,7 +93,8 @@ void initialize_properties()
     {39, "Galle Face", DARK_BLUE, 12000, 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
-    for (int i = 0; i < 22; i++) {
+    for (int i = 0; i < 22; i++)            //Assign properties' mortgage values, house_cost, hotel_cost using property values[]
+    {
         properties[i].mortgage_value = property_values[properties[i].property_color].mortgage_value;
         properties[i].house_cost = property_values[properties[i].property_color].house_cost;
         properties[i].hotel_cost = property_values[properties[i].property_color].hotel_cost;
@@ -112,4 +114,21 @@ int is_double(Dice_Value dice)
     return (dice.dice1 == dice.dice2);
 }
 
+void initialize_railways()
+{
+    Railway railways[4] = {
+        {5, "Colombo Fort Railway Station", 4000, 2000, 0, 0},
+        {15, "Kandy Railway Station", 4000, 2000, 0, 0},
+        {25, "Galle Railway Station", 4000, 2000, 0, 0},
+        {35, "Jaffna Railway Station", 4000, 2000, 0, 0}
+    };
+}
+void initialize_utilities()
+{
+    Utility utilities[2] = {
+        {12, "Ceylon Electricity Board", 3000, 1500, 0, 0},
+        {28, "National Water Supply and Drainage Board", 3000, 1500, 0, 0}
+    };
+}
 
+//Wrong mortgage value for utilities and railways. Need to fix it.

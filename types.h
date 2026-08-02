@@ -60,12 +60,12 @@ typedef struct Property {
     int property_age;
 } Property;
 
-enum PlayerID {P1,P2,P3,P4};
+enum PlayerBehavior {AGGRESIVE_INVESTOR, CONSERVATIVE_BANKER, RISK_TAKER, OPPORTUNISTIC_TRADER};
 
 typedef struct Player {
-    enum PlayerID player_id;
-    int player_behavior;
+    enum PlayerBehavior player_behavior;
     char *player_name;
+    int player_turn;
     int player_position;
     int player_balance;
     int player_properties[40];
@@ -75,6 +75,7 @@ typedef struct Player {
     int is_bankrupt;
     int railway_count;
     int utility_count;
+    
 
 } Player;
 
@@ -82,6 +83,45 @@ typedef struct Dice_Value {
     int dice1;
     int dice2;
 } Dice_Value;
+
+typedef struct Railway {
+    int square_no;
+    char *railway_name;
+    int purchase_price;
+    int mortgage_value;
+    int current_owner;
+    int mortgage_status;
+} Railway;
+
+typedef struct Utility {
+    int square_no;
+    char *utility_name;
+    int purchase_price;
+    int mortgage_value;
+    int current_owner;
+    int mortgage_status;
+} Utility;
+
+typedef struct Insurance_Company {
+    char *insurance_company_name;
+    int square_no;
+} Insurance_Company;
+
+
+enum InsurancePolicy {BASIC, COMPREHENSIVE, BUSINESS};
+enum DisasterType {FIRE, FLOOD, RIOT,VANDALISM,EARTHQUAKE, BUILDING_COLLAPSE, ELECTRICAL_FAILURE};
+
+typedef struct Insurance {
+    enum InsurancePolicy insurance_policy;
+    int coverage_disaster_types[7];
+    int premium_percentage;
+    int coverage_percentage;
+    int is_cover_for_hotel;
+    int is_cover_for_house;
+
+
+} Insurance;
+
 
 
 

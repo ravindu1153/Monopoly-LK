@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include "types.h"
 #include "board.h"
+#include "game.h"
 
 
 int main()
 {
-    int x = roll_dice(55);
-    printf("Dice value: %d\n", x);
-
+    start_game();
+    
     return 0;
 }
