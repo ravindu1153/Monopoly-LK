@@ -43,14 +43,13 @@ typedef struct Property_Value {
 } Property_Value;
 
 
-
 typedef struct Property {
     int square_no;
     char *property_name;
     enum PropertyColors property_color;
     int purchase_price;
-    int mortgage_value;
     int base_rent;
+    int mortgage_value;
     int house_cost;
     int hotel_cost;
     int num_houses;
@@ -61,9 +60,10 @@ typedef struct Property {
     int property_age;
 } Property;
 
+enum PlayerID {P1,P2,P3,P4};
 
 typedef struct Player {
-    int player_id;
+    enum PlayerID player_id;
     int player_behavior;
     char *player_name;
     int player_position;
@@ -77,6 +77,11 @@ typedef struct Player {
     int utility_count;
 
 } Player;
+
+typedef struct Dice_Value {
+    int dice1;
+    int dice2;
+} Dice_Value;
 
 
 

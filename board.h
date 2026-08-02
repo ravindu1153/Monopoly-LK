@@ -4,7 +4,7 @@
 
 
 void initialize_board();
-int roll_dice(int seed);
+Dice_Value roll_dice();
 void initialize_properties();
 
 #endif

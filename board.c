@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "types.h"
+
 
 void initialize_board()
 {
@@ -66,28 +68,28 @@ void initialize_properties()
     };
 
     Property properties[22] = {
-    {1, "Pettah", BROWN, 1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {3, "Maradana", BROWN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {6, "Bambalapitiya", LIGHT_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {8, "Wellawatte", LIGHT_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {9, "Mount Lavinia", LIGHT_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {11, "Nugegoda", PINK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {13, "Maharagama", PINK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {14, "Kottawa", PINK, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {16, "Negombo", ORANGE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {18, "Katunayake", ORANGE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {19, "Ja-Ela", ORANGE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {21, "Kandy City", RED, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {23, "Peradeniya", RED, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {24, "Katugastota", RED, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {26, "Galle Fort", YELLOW, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {27, "Unawatuna", YELLOW, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {29, "Hikkaduwa", YELLOW, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {31, "Jaffna Town", GREEN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {32, "Nallur", GREEN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {34, "Trincomalee", GREEN, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {37, "Nuwara Eliya", DARK_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-    {39, "Galle Face", DARK_BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+    {1, "Pettah", BROWN, 1500, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {3, "Maradana", BROWN, 1800, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {6, "Bambalapitiya", LIGHT_BLUE, 2500, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {8, "Wellawatte", LIGHT_BLUE, 2700, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {9, "Mount Lavinia", LIGHT_BLUE, 3000, 220, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {11, "Nugegoda", PINK, 3500, 260, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {13, "Maharagama", PINK, 3800, 280, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {14, "Kottawa", PINK, 4000, 300, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {16, "Negombo", ORANGE, 4500, 350, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {18, "Katunayake", ORANGE, 4700, 370, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {19, "Ja-Ela", ORANGE, 5000, 400, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {21, "Kandy City", RED, 5500, 450, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {23, "Peradeniya", RED, 5800, 480, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {24, "Katugastota", RED, 6000, 500, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {26, "Galle Fort", YELLOW, 6500, 600, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {27, "Unawatuna", YELLOW, 6800, 620, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {29, "Hikkaduwa", YELLOW, 7000, 650, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {31, "Jaffna Town", GREEN, 8000, 750, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {32, "Nallur", GREEN, 8300, 780, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {34, "Trincomalee", GREEN, 8500, 800, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {37, "Nuwara Eliya", DARK_BLUE, 10000, 1000, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+    {39, "Galle Face", DARK_BLUE, 12000, 1200, 0, 0, 0, 0, 0, 0, 0, 0, 0}
     };
 
     for (int i = 0; i < 22; i++) {
@@ -97,9 +99,17 @@ void initialize_properties()
     };
 }
 
-int roll_dice(int seed)
+Dice_Value roll_dice()
 {
-    srand(seed);
-    int dice_value = rand() % 6 + 1;
-    return dice_value;
+    srand(time(NULL));
+    int dice1 = rand() % 6 + 1;
+    int dice2 = rand() % 6 + 1;
+    return (Dice_Value){dice1, dice2};
 }
+
+int is_double(Dice_Value dice)
+{
+    return (dice.dice1 == dice.dice2);
+}
+
+
