@@ -2,9 +2,10 @@
 #define BOARD_H
 #include "types.h"
 
+#define MAX_PLAYERS 4
 
-void initialize_board();
+
 Dice_Value roll_dice();
-void initialize_properties();
+int get_turn_order(int player_list[], int len);
 
 #endif

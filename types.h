@@ -22,6 +22,8 @@ typedef struct Square {
     enum SquareTypes square_type;
 } Square;
 
+extern Square square[40];
+
 
 enum PropertyColors {
     BROWN,
@@ -42,6 +44,7 @@ typedef struct Property_Value {
     int hotel_cost;
 } Property_Value;
 
+extern Property_Value property_values[8];
 
 typedef struct Property {
     int square_no;
@@ -59,8 +62,17 @@ typedef struct Property {
     int insurance_status;
     int property_age;
 } Property;
+extern Property properties[22];
 
 enum PlayerBehavior {AGGRESIVE_INVESTOR, CONSERVATIVE_BANKER, RISK_TAKER, OPPORTUNISTIC_TRADER};
+
+
+
+typedef struct Dice_Value {
+    int dice1;
+    int dice2;
+    int sum;
+} Dice_Value;
 
 typedef struct Player {
     enum PlayerBehavior player_behavior;
@@ -75,14 +87,14 @@ typedef struct Player {
     int is_bankrupt;
     int railway_count;
     int utility_count;
+    Dice_Value last_dice_roll;
+    //int current_round;
+    
     
 
 } Player;
 
-typedef struct Dice_Value {
-    int dice1;
-    int dice2;
-} Dice_Value;
+extern Player players[4];
 
 typedef struct Railway {
     int square_no;
@@ -92,6 +104,7 @@ typedef struct Railway {
     int current_owner;
     int mortgage_status;
 } Railway;
+extern Railway railways[4];
 
 typedef struct Utility {
     int square_no;
@@ -101,6 +114,7 @@ typedef struct Utility {
     int current_owner;
     int mortgage_status;
 } Utility;
+extern Utility utilities[2];
 
 typedef struct Insurance_Company {
     char *insurance_company_name;
@@ -121,7 +135,6 @@ typedef struct Insurance {
 
 
 } Insurance;
-
 
 
 

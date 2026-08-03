@@ -6,8 +6,9 @@
 
 void start_game() {
 
-    initialize_players();
-    initialize_board();
-    initialize_properties();
+}
+
+void start_prints()
+{
 
 }
