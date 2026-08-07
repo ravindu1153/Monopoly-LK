@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include "types.h"
 #include "board.h"
 #include "player.h"
 #include "others.h"
 
 
-#define MAX_SQUARES 40
-#define MAX_NO_OF_REPEATING_ROLLS 10
+
+
 
 
 Square square[MAX_SQUARES] = {
@@ -92,15 +93,15 @@ Property properties[22] = {
     };
 
 Railway railways[4] = {
-        {5, "Colombo Fort Railway Station", 4000, 2000, 0, 0},
-        {15, "Kandy Railway Station", 4000, 2000, 0, 0},
-        {25, "Galle Railway Station", 4000, 2000, 0, 0},
-        {35, "Jaffna Railway Station", 4000, 2000, 0, 0}
+        {5, "Colombo Fort Railway Station", 1500, 750, 0, 0},
+        {15, "Kandy Railway Station", 1500, 750, 0, 0},
+        {25, "Galle Railway Station", 1500, 750, 0, 0},
+        {35, "Jaffna Railway Station", 1500, 750, 0, 0}
     };
 
 Utility utilities[2] = {
-        {12, "Ceylon Electricity Board", 3000, 1500, 0, 0},
-        {28, "National Water Supply and Drainage Board", 3000, 1500, 0, 0}
+        {12, "Ceylon Electricity Board", 1500, 750, 0, 0},
+        {28, "National Water Supply and Drainage Board", 1500, 750, 0, 0}
     };
 
 //Wrong mortgage value for utilities and railways. Need to fix it.
@@ -123,33 +124,88 @@ int is_double(Dice_Value dice)
 
 int get_turn_order2(int history[][MAX_NO_OF_REPEATING_ROLLS], int len_history1, int len_history2)
 {
-    for (int j = 0; j < len_history2; j++){
-        printf("Dice roll round %d\n",j);
-        for (int i = 0; i < len_history1; i++){
-            printf("Player_%d: %d | ",i, history[i][j]);
-        }
-        printf("\n");
+   int id = 0;                      //Initialize player id list
+   int player_id[len_history1];
+   while (id < len_history1)
+   {
+    player_id[id] = id;
+    id++;
+   }
 
+    long int player_marks[len_history1];            //inizialize player_mark with all elements = 0
+    for (int mark = 0; mark < len_history1; mark++) 
+    {
+        player_marks[mark] = 0;
+    }
+
+
+    for (int player = 0; player < len_history1; player++)       //Giving marks for each dice roll round for each player
+    {
+        int multiplier = (int)pow(12,len_history2);
+
+        for (int roll = 0; roll < len_history2; roll++)
+        {
+            if (history[player][roll] != 0)
+            {
+                player_marks[player] += history[player][roll]*multiplier;
+                
+            }
+            multiplier/=12;
+        }
+    }
+    
+    long int temp_mark;                     //Sort player_id array according to player_marks' descending 
+    int temp_id;
+    for (int i = 0; i < len_history1; i++)
+    {
+        for (int j =  i+1; j <len_history1; j++)
+        {
+            if (player_marks[i] < player_marks[j])
+            {
+                temp_mark = player_marks[i];
+                temp_id = player_id[i];
+                player_marks[i] = player_marks[j];
+                player_id[i] = player_id[j];
+                player_marks[j] = temp_mark;
+                player_id[j] = temp_id;
+            }
+            
+        }
+    }
+
+    for (int i = 0; i < len_history1; i++)      //Assign player_turn value for each player
+    {   
+        players[player_id[i]].player_turn = i;
+    }
+    printf("%s will begin the game!\n\n", players[player_id[0]].player_name);
+    printf("Turn order:\n");
+    
+    for (int i = 0; i < len_history1; i++)
+    {   
+        printf("%s\n",players[player_id[i]].player_name);
     }
 
 }
+
 int get_turn_order(int player_list[], int len)
 {   
     static int roll_count = 0;
     static int roll_sum_history[NO_OF_PLAYERS][MAX_NO_OF_REPEATING_ROLLS]; //Maximum number of repeating rolls is MAX_NO_OF_REPEATING_ROLLS
     
     if (roll_count == 0){
-    for (int i = 0; i < len; i++)                         //Assign all values in roll_history to -1
+    for (int i = 0; i < len; i++)                         //Assign all values in roll_history to 0
     {
         for (int j = 0; j < MAX_NO_OF_REPEATING_ROLLS; j++)
         {
-            roll_sum_history[i][j] = -1;
+            roll_sum_history[i][j] = 0;
         }
     }}
 
     if (len == 0)
     {   get_turn_order2(roll_sum_history,NO_OF_PLAYERS,MAX_NO_OF_REPEATING_ROLLS);
-        return 0;}
+        return 0;
+    }
+    
     for (int i = 0; i < len; i++)
     {
         if (player_list[i] != -1){
@@ -166,8 +222,9 @@ int get_turn_order(int player_list[], int len)
 
     for (int i = 0; i < len; i++) //print random sum (For testing purpose only)
     {
-        printf("%s : %d\n",players[player_list[i]].player_name, players[player_list[i]].last_dice_roll.sum);
+        printf("%s rolls: %d\n",players[player_list[i]].player_name, players[player_list[i]].last_dice_roll.sum);
     }
+    printf("\n");
 
     int equal_players[len]; //Initialize equal_players[] with all elements = -1
     for (int i = 0; i < len; i++)
@@ -205,13 +262,17 @@ int get_turn_order(int player_list[], int len)
     }
     
 
-    for (int i = 0; i < LEN(equal_players); i++) //print equal priority players (For testing purpose only)
+    for (int i = 0; i < LEN(equal_players); i++) //print equal priority players
     {
-        printf("Same: %d", equal_players[i]);
+        if (equal_players[i] != -1)
+        {
+            printf("%s\n", players[equal_players[i]].player_name);
+        }
     }
-    printf("\n\n");
-    
-    printf("\n\n-----------\n");
+    if (equal_players[0] != -1)
+    {
+        printf("\t\thas the same values.\nReroll:\n");
+    }
 
     get_turn_order(equal_players_new,LEN(equal_players_new));
 
